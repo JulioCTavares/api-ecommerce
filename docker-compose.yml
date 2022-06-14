@@ -11,6 +11,18 @@ services:
       - POSTGRES_DB=ecommerce
     volumes:
      - pgdata:/data/postgres
+  app:
+      build: .
+      container_name: api-e-commerce
+      restart: always
+      ports:
+        - 4000:4000
+      volumes:
+        - .:/usr/app
+      links:
+        - pg-dev
+      depends_on:
+        - pg-dev
 volumes:
   pgdata:
     driver: local
