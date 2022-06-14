@@ -2,17 +2,22 @@ version: '3.8'
 services:
   pg-dev:
     image: postgres
-    restart: always
+    container_name: pg-ecommerce
+    restart: unless-stopped
+    hostname: postgres
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=ecommerce
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: ecommerce
     volumes:
-     - pgdata:/data/postgres
+     - pgdata:/var/lib/postgresql/data
   app:
-      build: .
+      stdin_open: true
+      build: 
+        context: .
+        dockerfile: Dockerfile
       container_name: api-e-commerce
       restart: always
       ports:

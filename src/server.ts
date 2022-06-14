@@ -20,4 +20,4 @@ app.use(routes);
 
 app.use(errorMiddleware);
 
-app.listen(process.env.PORT || 4000, () => console.log("server is runnig"));
+app.listen(process.env.PORT || 4000, () => console.log("server is running"));

@@ -44,6 +44,9 @@ model Product {
   code  Int
   image String
 
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
   Request Request[]
   @@map("products")
 }
@@ -66,4 +69,7 @@ model Request {
   status RequestStatus @default(PENDING)
 
   created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("requests")
 }
