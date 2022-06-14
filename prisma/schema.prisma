@@ -38,11 +38,11 @@ model Client {
 }
 
 model Product {
-  id    String  @id @default(uuid())
-  name  String  @unique
-  price Float
+  id    String @id @default(uuid())
+  name  String @unique
+  price Int
   code  Int
-  image String?
+  image String
 
   Request Request[]
   @@map("products")
