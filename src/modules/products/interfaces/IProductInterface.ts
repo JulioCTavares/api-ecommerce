@@ -3,7 +3,9 @@ import { Product } from "../model/Product";
 
 export default interface IProductInterface {
   create(data: CreateProductDto): Promise<Product>;
-  // findById(id: string): Promise< Product | null>;
-  // findAll(): Promise<Product[]>;
-  // delete(prodct: Product): Promise<void>;
+  findById(id: string): Promise<Product | null>;
+  findByName(name: string): Promise<Product | null>;
+  findByCode(code: number): Promise<Product | null>;
+  findAll(): Promise<Product[]>;
+  delete(product: Product): Promise<void>;
 }
