@@ -1,6 +1,8 @@
 import { hash } from "bcrypt";
+import path from "path";
 import { inject, injectable } from "tsyringe";
 
+import IMailProvider from "../../../../utils/container/providers/MailProvider/IMailProvider";
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
 import { CreateUserDto } from "../../dtos/create-user.dto";
 import IUsersInterface from "../../interfaces/IUserInterface";
@@ -10,22 +12,44 @@ import { User } from "../../model/User";
 export class CreateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRespository: IUsersInterface
+    private usersRepository: IUsersInterface,
+    @inject("MailProvider")
+    private mailProvider: IMailProvider
   ) {}
 
   async execute({ email, password }: CreateUserDto): Promise<User> {
-    const userExists = await this.usersRespository.findByEmail(email);
+    const userExists = await this.usersRepository.findByEmail(email);
 
     if (userExists) {
       throw new ErrorsApp(400, "User already exists!");
     }
 
-    const hasedPassword = await hash(password, 10);
+    const hashedPassword = await hash(password, 10);
 
-    const user = this.usersRespository.create({
+    const user = this.usersRepository.create({
       email,
-      password: hasedPassword,
+      password: hashedPassword,
     });
+
+    const confirmUserTemplate = path.resolve(
+      __dirname,
+      "..",
+      "..",
+      "views",
+      "confirm-user.hbs"
+    );
+
+    const variables = {
+      name: (await user).email,
+      link: `${process.env.APP_API_URL}/confirm-user?`,
+    };
+
+    await this.mailProvider.sendMail(
+      email,
+      "Registration Confirmation",
+      variables,
+      confirmUserTemplate
+    );
 
     return user;
   }
