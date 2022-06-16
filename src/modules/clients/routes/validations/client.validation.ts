@@ -10,7 +10,7 @@ export const loginClientValidate = celebrate({
 export const createCLientValidate = celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
-    email: Joi.string().email().trim().lowercase().required(),
+    email: Joi.string().email().required(),
     password: Joi.string().required(),
     phone: Joi.string().required().min(8).max(11),
     address: Joi.string().required(),

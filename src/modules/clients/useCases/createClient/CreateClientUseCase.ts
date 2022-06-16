@@ -23,13 +23,13 @@ export class CreateClientUseCase {
     const emailExists = await this.clientRepository.findByEmail(email);
 
     if (emailExists) {
-      throw new ErrorsApp(401, "Email already in use");
+      throw new ErrorsApp(401, "Client Already Exists");
     }
 
     const nameExist = await this.clientRepository.findByName(name);
 
     if (nameExist) {
-      throw new ErrorsApp(401, "Name already in use");
+      throw new ErrorsApp(401, "Client Name Already Exists");
     }
 
     const hashedPassword = await hash(password, 10);

@@ -19,7 +19,7 @@ export class ShowClientUseCase {
     const client = await this.clientsRepository.findById(clientId);
 
     if (!client) {
-      throw new ErrorsApp(404, "Client not found");
+      throw new ErrorsApp(404, "Client does not found");
     }
 
     return client;

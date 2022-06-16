@@ -19,7 +19,7 @@ export class ShowUserUseCase {
     const user = await this.usersRespository.findById(userId);
 
     if (!user) {
-      throw new ErrorsApp(404, "User not found");
+      throw new ErrorsApp(404, "User does not found");
     }
 
     return user;
