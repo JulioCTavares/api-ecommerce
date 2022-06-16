@@ -1,0 +1,69 @@
+<style>
+  .container_email img {
+    width: 350px;
+    padding: 20px;
+  }
+
+  .container_email {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .text_email {
+    width: 600px;
+    padding-top: 15px;
+  }
+
+  .text_email h1 {
+    color: #3C8ACB;
+  }
+
+  .text_email p {
+    color: #555555;
+  }
+
+  .button_email button {
+    margin-top: 20px;
+    border: none;
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #4BBF7D;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .footer_email {
+    margin-top: 70px;
+    color: #555555;
+  }
+
+  .footer_email h4 {
+    color: #3C8ACB;
+  }
+</style>
+
+<div class="container_email">
+  <div class="text_email">
+    <h1>Olá, {{name}}!</h1>
+    <p>
+      Seja muito bem-vindo!.
+      <br />
+      Para confirmar seu cadastro em nossa plataforma, acesse o link abaixo:
+    </p>
+  </div>
+  <div class="button_email">
+    <a href="{{link}}">
+      <button type="submit">
+        Confirmar cadastro
+      </button>
+    </a>
+  </div>
+  <div class="footer_email">
+    <p>Obrigado!</p>
+    <h4>Equipe Inicial</h4>
+  </div>
+</div>

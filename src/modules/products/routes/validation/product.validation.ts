@@ -4,7 +4,7 @@ export const createProductValidate = celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
     price: Joi.number().required(),
-    image: File,
+    image: Joi.string().required(),
   },
 });
 
