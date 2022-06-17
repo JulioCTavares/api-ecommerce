@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
 import { IClientRepository } from "../../../clients/interfaces/IClientRepository";
-import IProductInterface from "../../../products/interfaces/IProductInterface";
+import IProductRepository from "../../../products/interfaces/IProductRepository";
 import { CreateOrderDto } from "../../dtos/create-order.dto";
 import { Order } from "../../entities/Order";
 import { IOrderRepository } from "../../interfaces/IOrderRepository";
@@ -15,7 +15,7 @@ export class CreateOrderUseCase {
     @inject("ClientsRepository")
     private clientsRepository: IClientRepository,
     @inject("ProductsRepository")
-    private productsRepository: IProductInterface
+    private productsRepository: IProductRepository
   ) {}
 
   async execute({ client_id, product_id }: CreateOrderDto): Promise<Order> {

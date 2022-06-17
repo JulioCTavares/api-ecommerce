@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
-import IProductInterface from "../../interfaces/IProductInterface";
+import IProductRepository from "../../interfaces/IProductRepository";
 
 interface IRequest {
   productId: string;
@@ -11,7 +11,7 @@ interface IRequest {
 export class DeleteProductUseCase {
   constructor(
     @inject("ProductsRepository")
-    private productsRepository: IProductInterface
+    private productsRepository: IProductRepository
   ) {}
 
   async execute({ productId }: IRequest): Promise<void> {

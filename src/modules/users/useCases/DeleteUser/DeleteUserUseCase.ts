@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
-import IUsersInterface from "../../interfaces/IUserInterface";
+import IUserRepository from "../../interfaces/IUserRepository";
 
 interface IRequest {
   userId: string;
@@ -11,7 +11,7 @@ interface IRequest {
 export class DeleteUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRespository: IUsersInterface
+    private usersRespository: IUserRepository
   ) {}
 
   async execute({ userId }: IRequest): Promise<void> {
