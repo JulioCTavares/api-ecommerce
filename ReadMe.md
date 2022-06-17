@@ -1,6 +1,6 @@
 
 
-# API E-Commerce Simples 
+# API E-Commerce
 
 ## Descrição 
 
