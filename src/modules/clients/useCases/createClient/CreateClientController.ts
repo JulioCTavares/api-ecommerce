@@ -12,11 +12,11 @@ export class CreateClientController {
     const client = await createClientUseCase.execute({
       name,
       email,
-      password,
+      passwordDto: password,
       phone,
       address,
     });
 
-    return res.status(201).json({ sucess: true, client });
+    return res.status(201).json({ success: true, client });
   }
 }

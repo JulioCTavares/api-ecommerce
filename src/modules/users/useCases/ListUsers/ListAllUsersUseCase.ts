@@ -1,13 +1,13 @@
 import { inject, injectable } from "tsyringe";
 
-import IUsersInterface from "../../interfaces/IUserInterface";
-import { User } from "../../model/User";
+import { User } from "../../entities/User";
+import IUserRepository from "../../interfaces/IUserRepository";
 
 @injectable()
 export class ListUsersUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRespository: IUsersInterface
+    private usersRespository: IUserRepository
   ) {}
 
   async execute(): Promise<User[]> {

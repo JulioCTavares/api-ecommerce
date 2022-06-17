@@ -5,30 +5,30 @@ import { inject, injectable } from "tsyringe";
 import IMailProvider from "../../../../utils/container/providers/MailProvider/IMailProvider";
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
 import { CreateUserDto } from "../../dtos/create-user.dto";
-import IUsersInterface from "../../interfaces/IUserInterface";
-import { User } from "../../model/User";
+import { User } from "../../entities/User";
+import IUsersRepository from "../../interfaces/IUserRepository";
 
 @injectable()
 export class CreateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRepository: IUsersInterface,
+    private usersRepository: IUsersRepository,
     @inject("MailProvider")
     private mailProvider: IMailProvider
   ) {}
 
-  async execute({ email, password }: CreateUserDto): Promise<User> {
+  async execute({ email, passwordDto }: CreateUserDto): Promise<User> {
     const userExists = await this.usersRepository.findByEmail(email);
 
     if (userExists) {
       throw new ErrorsApp(400, "User already exists");
     }
 
-    const hashedPassword = await hash(password, 10);
+    const hashedPassword = await hash(passwordDto, 10);
 
     const user = this.usersRepository.create({
       email,
-      password: hashedPassword,
+      passwordDto: hashedPassword,
     });
 
     const confirmUserTemplate = path.resolve(
@@ -51,6 +51,8 @@ export class CreateUserUseCase {
       confirmUserTemplate
     );
 
-    return user;
+    const { password, ...userReturn } = await user;
+
+    return userReturn;
   }
 }

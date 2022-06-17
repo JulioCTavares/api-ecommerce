@@ -7,12 +7,12 @@ export class ClientsRepository implements IClientRepository {
   public async create({
     name,
     email,
-    password,
+    passwordDto,
     phone,
     address,
   }: CreateClientDto): Promise<Client> {
     const client = await prisma.client.create({
-      data: { name, email, password, phone, address },
+      data: { name, email, password: passwordDto, phone, address },
     });
 
     return client;

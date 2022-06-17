@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
 
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
-import IUsersInterface from "../../interfaces/IUserInterface";
-import { User } from "../../model/User";
+import { User } from "../../entities/User";
+import IUserRepository from "../../interfaces/IUserRepository";
 
 interface IRequest {
   userId: string;
@@ -12,7 +12,7 @@ interface IRequest {
 export class ShowUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRespository: IUsersInterface
+    private usersRespository: IUserRepository
   ) {}
 
   async execute({ userId }: IRequest): Promise<User> {
@@ -22,6 +22,8 @@ export class ShowUserUseCase {
       throw new ErrorsApp(404, "User does not found");
     }
 
-    return user;
+    const { password, ...userReturn } = user;
+
+    return userReturn;
   }
 }

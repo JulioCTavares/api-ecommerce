@@ -1,5 +1,5 @@
 import { CreateUserDto } from "../dtos/create-user.dto";
-import { User } from "../model/User";
+import { User } from "../entities/User";
 
 export default interface IUsersRepository {
   create(data: CreateUserDto): Promise<User>;

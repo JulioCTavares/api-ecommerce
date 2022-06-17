@@ -22,6 +22,8 @@ export class ShowClientUseCase {
       throw new ErrorsApp(404, "Client does not found");
     }
 
-    return client;
+    const { password, ...clientReturn } = client;
+
+    return clientReturn;
   }
 }

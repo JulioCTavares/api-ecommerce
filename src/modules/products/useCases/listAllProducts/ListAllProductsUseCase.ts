@@ -1,13 +1,13 @@
 import { inject, injectable } from "tsyringe";
 
-import IProductInterface from "../../interfaces/IProductInterface";
-import { Product } from "../../model/Product";
+import { Product } from "../../entities/Product";
+import IProductRepository from "../../interfaces/IProductRepository";
 
 @injectable()
 export class ListAllProductsUseCase {
   constructor(
     @inject("ProductsRepository")
-    private productsRepository: IProductInterface
+    private productsRepository: IProductRepository
   ) {}
 
   async execute(): Promise<Product[]> {

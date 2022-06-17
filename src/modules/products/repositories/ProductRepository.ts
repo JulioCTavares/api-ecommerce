@@ -1,9 +1,9 @@
 import { prisma } from "../../../database/prisma";
 import { CreateProductDto } from "../dtos/create-product.dto";
-import IProductInterface from "../interfaces/IProductInterface";
-import { Product } from "../model/Product";
+import { Product } from "../entities/Product";
+import IProductRepository from "../interfaces/IProductRepository";
 
-export class ProductsRepository implements IProductInterface {
+export class ProductsRepository implements IProductRepository {
   public async create({
     name,
     price,

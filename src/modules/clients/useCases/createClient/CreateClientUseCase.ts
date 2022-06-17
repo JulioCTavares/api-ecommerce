@@ -16,7 +16,7 @@ export class CreateClientUseCase {
   async execute({
     name,
     email,
-    password,
+    passwordDto,
     phone,
     address,
   }: CreateClientDto): Promise<Client> {
@@ -32,16 +32,18 @@ export class CreateClientUseCase {
       throw new ErrorsApp(401, "Client Name Already Exists");
     }
 
-    const hashedPassword = await hash(password, 10);
+    const hashedPassword = await hash(passwordDto, 10);
 
     const client = await this.clientRepository.create({
       name,
       email,
-      password: hashedPassword,
+      passwordDto: hashedPassword,
       phone,
       address,
     });
 
-    return client;
+    const { password, ...clientReturn } = client;
+
+    return clientReturn;
   }
 }

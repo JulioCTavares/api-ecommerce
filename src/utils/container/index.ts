@@ -4,13 +4,13 @@ import { IClientRepository } from "../../modules/clients/interfaces/IClientRepos
 import { ClientsRepository } from "../../modules/clients/repositories/ClientRepository";
 import { IOrderRepository } from "../../modules/orders/interfaces/IOrderRepository";
 import { OrderRepository } from "../../modules/orders/repositories/OrderRepository";
-import IProductInterface from "../../modules/products/interfaces/IProductInterface";
+import IProductRepository from "../../modules/products/interfaces/IProductRepository";
 import { ProductsRepository } from "../../modules/products/repositories/ProductRepository";
-import IUsersInterface from "../../modules/users/interfaces/IUserInterface";
+import IUsersRepository from "../../modules/users/interfaces/IUserRepository";
 import { UsersRepository } from "../../modules/users/repositories/UserRepository";
 import "./providers";
 
-container.registerSingleton<IUsersInterface>(
+container.registerSingleton<IUsersRepository>(
   "UsersRepository",
   UsersRepository
 );
@@ -20,7 +20,7 @@ container.registerSingleton<IClientRepository>(
   ClientsRepository
 );
 
-container.registerSingleton<IProductInterface>(
+container.registerSingleton<IProductRepository>(
   "ProductsRepository",
   ProductsRepository
 );

@@ -3,14 +3,14 @@ import { inject, injectable } from "tsyringe";
 import IStorageProvider from "../../../../utils/container/providers/StorageProviders/IStorageProvider";
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
 import { CreateProductDto } from "../../dtos/create-product.dto";
-import IProductInterface from "../../interfaces/IProductInterface";
-import { Product } from "../../model/Product";
+import { Product } from "../../entities/Product";
+import IProductRepository from "../../interfaces/IProductRepository";
 
 @injectable()
 export class CreateProductUseCase {
   constructor(
     @inject("ProductsRepository")
-    private productRespository: IProductInterface,
+    private productRespository: IProductRepository,
     @inject("StorageProvider")
     private storageProvider: IStorageProvider
   ) {}

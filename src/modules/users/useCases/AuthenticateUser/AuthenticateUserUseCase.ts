@@ -4,8 +4,8 @@ import { inject, injectable } from "tsyringe";
 
 import authConfig from "../../../../config/auth";
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
-import IUsersInterface from "../../interfaces/IUserInterface";
-import { User } from "../../model/User";
+import { User } from "../../entities/User";
+import IUserRepository from "../../interfaces/IUserRepository";
 
 interface IRequest {
   email: string;
@@ -21,7 +21,7 @@ interface IResponse {
 export class AuthenticateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRepository: IUsersInterface
+    private usersRepository: IUserRepository
   ) {}
 
   async execute({ email, password }: IRequest): Promise<IResponse> {

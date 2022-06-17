@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
 
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
-import IProductInterface from "../../interfaces/IProductInterface";
-import { Product } from "../../model/Product";
+import { Product } from "../../entities/Product";
+import IProductRepository from "../../interfaces/IProductRepository";
 
 interface IRequest {
   productId: string;
@@ -12,7 +12,7 @@ interface IRequest {
 export class ShowProductUseCase {
   constructor(
     @inject("ProductsRepository")
-    private productsRepository: IProductInterface
+    private productsRepository: IProductRepository
   ) {}
 
   async execute({ productId }: IRequest): Promise<Product> {

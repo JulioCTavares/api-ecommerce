@@ -3,7 +3,7 @@ export class CreateClientDto {
 
   email: string;
 
-  password: string;
+  passwordDto: string;
 
   phone: string;
 

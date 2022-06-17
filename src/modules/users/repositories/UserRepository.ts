@@ -1,14 +1,14 @@
 import { prisma } from "../../../database/prisma";
 import { CreateUserDto } from "../dtos/create-user.dto";
-import IUsersInterface from "../interfaces/IUserInterface";
-import { User } from "../model/User";
+import { User } from "../entities/User";
+import IUsersRepository from "../interfaces/IUserRepository";
 
-export class UsersRepository implements IUsersInterface {
-  public async create({ email, password }: CreateUserDto): Promise<User> {
+export class UsersRepository implements IUsersRepository {
+  public async create({ email, passwordDto }: CreateUserDto): Promise<User> {
     const user = await prisma.user.create({
       data: {
         email,
-        password,
+        password: passwordDto,
       },
     });
 

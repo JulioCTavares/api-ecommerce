@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
 
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
-import IUsersInterface from "../../interfaces/IUserInterface";
-import { User } from "../../model/User";
+import { User } from "../../entities/User";
+import IUserRepository from "../../interfaces/IUserRepository";
 
 interface IRequest {
   userId: string;
@@ -13,7 +13,7 @@ interface IRequest {
 export class UpdateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRespository: IUsersInterface
+    private usersRespository: IUserRepository
   ) {}
 
   async execute({ userId, email }: IRequest): Promise<User | null> {
@@ -29,8 +29,10 @@ export class UpdateUserUseCase {
       throw new ErrorsApp(401, "Email already in use");
     }
 
-    const userUpdated = await this.usersRespository.updateEmail(user, email);
+    await this.usersRespository.updateEmail(user, email);
 
-    return userUpdated;
+    const { password, ...restUser } = user;
+
+    return restUser;
   }
 }
