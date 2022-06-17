@@ -1,7 +1,7 @@
 import { CreateClientDto } from "../dtos/create-client.dto";
-import { Client } from "../models/Client";
+import { Client } from "../entities/Client";
 
-export interface IClientInterface {
+export interface IClientRepository {
   create(data: CreateClientDto): Promise<Client>;
   findByEmail(email: string): Promise<Client | null>;
   findById(id: string): Promise<Client | null>;

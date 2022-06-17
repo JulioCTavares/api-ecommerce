@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
 
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
-import { IClientInterface } from "../../interfaces/IClientInterface";
-import { Client } from "../../models/Client";
+import { Client } from "../../entities/Client";
+import { IClientRepository } from "../../interfaces/IClientRepository";
 
 interface IRequest {
   clientId: string;
@@ -12,7 +12,7 @@ interface IRequest {
 export class ShowClientUseCase {
   constructor(
     @inject("ClientsRepository")
-    private clientsRepository: IClientInterface
+    private clientsRepository: IClientRepository
   ) {}
 
   async execute({ clientId }: IRequest): Promise<Client> {

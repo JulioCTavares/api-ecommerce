@@ -1,9 +1,9 @@
 import { prisma } from "../../../database/prisma";
 import { CreateClientDto } from "../dtos/create-client.dto";
-import { IClientInterface } from "../interfaces/IClientInterface";
-import { Client } from "../models/Client";
+import { Client } from "../entities/Client";
+import { IClientRepository } from "../interfaces/IClientRepository";
 
-export class ClientsRepository implements IClientInterface {
+export class ClientsRepository implements IClientRepository {
   public async create({
     name,
     email,

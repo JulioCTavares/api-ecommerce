@@ -1,13 +1,13 @@
 import { inject, injectable } from "tsyringe";
 
-import { IClientInterface } from "../../interfaces/IClientInterface";
-import { Client } from "../../models/Client";
+import { Client } from "../../entities/Client";
+import { IClientRepository } from "../../interfaces/IClientRepository";
 
 @injectable()
 export class ListClientsUseCase {
   constructor(
     @inject("ClientsRepository")
-    private clientsRepository: IClientInterface
+    private clientsRepository: IClientRepository
   ) {}
 
   async execute(): Promise<Client[]> {

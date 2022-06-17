@@ -1,11 +1,11 @@
 import { Router } from "express";
 
-import { ensuredAuthenticated } from "../../users/routes/middleware/ensureUserAuthenticate";
 import { AuthenticateClientController } from "../useCases/authClient/AuthClientController";
 import { CreateClientController } from "../useCases/createClient/CreateClientController";
 import { DeleteClientController } from "../useCases/deleteClient/DeleteClientController";
 import { ListClientsController } from "../useCases/listClients/LIstClientsController";
 import { ShowClientController } from "../useCases/showClient/ShowClientController";
+import { ensuredClientAuthenticated } from "./middlewares/ensureClientAuthenticate";
 import {
   createCLientValidate,
   deleteCLientValidate,
@@ -26,7 +26,7 @@ const authClientController = new AuthenticateClientController();
 
 clientRouter.post("/", createCLientValidate, createClientController.handle);
 clientRouter.post("/login", loginClientValidate, authClientController.handle);
-clientRouter.use(ensuredAuthenticated);
+clientRouter.use(ensuredClientAuthenticated);
 clientRouter.get("/", listClientsController.handle);
 clientRouter.get("/:id", showClientValidate, showClientController.handle);
 clientRouter.delete(

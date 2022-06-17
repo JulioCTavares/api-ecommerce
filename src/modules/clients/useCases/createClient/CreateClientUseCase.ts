@@ -3,14 +3,14 @@ import { inject, injectable } from "tsyringe";
 
 import ErrorsApp from "../../../../utils/errors/ErrorApp";
 import { CreateClientDto } from "../../dtos/create-client.dto";
-import { IClientInterface } from "../../interfaces/IClientInterface";
-import { Client } from "../../models/Client";
+import { Client } from "../../entities/Client";
+import { IClientRepository } from "../../interfaces/IClientRepository";
 
 @injectable()
 export class CreateClientUseCase {
   constructor(
     @inject("ClientsRepository")
-    private clientRepository: IClientInterface
+    private clientRepository: IClientRepository
   ) {}
 
   async execute({

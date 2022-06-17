@@ -30,9 +30,9 @@ model Client {
 
 
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @default(now()) @updatedAt
-  request    Request[]
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+  request    Order[]
 
   @@map("clients")
 }
@@ -47,17 +47,17 @@ model Product {
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
 
-  Request Request[]
+  Request Order[]
   @@map("products")
 }
 
-enum RequestStatus {
+enum OrderStatus {
   PENDING
   APPROVED
   DENIED
 }
 
-model Request {
+model Order {
   id String @id @default(uuid())
 
   client    Client @relation(fields: [client_id], references: [id])
@@ -66,10 +66,10 @@ model Request {
   list_products Product @relation(fields: [product_id], references: [id])
   product_id    String
 
-  status RequestStatus @default(PENDING)
+  status OrderStatus @default(PENDING)
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
 
-  @@map("requests")
+  @@map("orders")
 }

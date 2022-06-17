@@ -11,7 +11,7 @@ interface ITokenPayload {
   sub: string;
 }
 
-export async function ensuredAuthenticated(
+export async function ensuredClientAuthenticated(
   req: Request,
   res: Response,
   next: NextFunction
